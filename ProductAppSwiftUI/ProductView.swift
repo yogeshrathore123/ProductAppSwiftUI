@@ -14,7 +14,6 @@ struct ProductView: View {
     var body: some View {
         NavigationView {
             List(viewModel.products) { product in
-                
                 NavigationLink {
                     ProductDetailView(product: product)
                 } label: {
@@ -23,6 +22,14 @@ struct ProductView: View {
             }
             .listStyle(.plain)
             .navigationTitle("Products")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    
+                    NavigationLink("Products Carousel") {
+                        ProductViewByTab(products: viewModel.products)
+                    }
+                }
+            }
         }
         .task {
             await viewModel.fetchProducts()
